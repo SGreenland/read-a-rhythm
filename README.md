@@ -1,4 +1,5 @@
-# Read-a-Rhythm ### (A music app to practice reading rhythms)
+# Read-a-Rhythm 
+### (A music app to practice reading rhythms)
 
 Built with React, I have attempted to create a simple but effective practice tool to use by students and teachers
 of music. It generates a random bar of note-values based on the time-signature and difficulty selection.
