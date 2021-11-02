@@ -5,7 +5,7 @@ Built with React, I have attempted to create a simple but effective practice too
 of music. It generates a random bar of note-values based on the time-signature and difficulty selection.
 You can change the tempo, use the metronome (which also gives you a count-in and highlights the beats) and toggle repeat bars on or off.
 
-It was a challenging but enjoyable project, with many conditionals and setIntervals to generate the music and implement the metronome.
+It was a challenging but enjoyable project with many conditionals, loops and timing functions to implement the metronome and generate the random notes. 
 
 ## Potential Improvements/additional features
 
@@ -16,7 +16,7 @@ It was a challenging but enjoyable project, with many conditionals and setInterv
 
 ## Screenshot
 
-![Alt screenshot](/sight-reading-music-app/src/images/screenshot.png)
+![Alt screenshot](src/images/screenshot.png)
 
 
 
