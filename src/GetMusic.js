@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import HelpInfo from "./HelpInfo";
 
-export default function GetMusic({ tempo, timeSig, difficulty, bar, setBar, blankSquare, closeHelp }) {
+export default function GetMusic({
+  tempo,
+  timeSig,
+  difficulty,
+  bar,
+  setBar,
+  blankSquare,
+  closeHelp,
+}) {
   const crotchet = require("./images/1.png").default;
   const minim = require("./images/2.png").default;
   const crotchetRest = require("./images/3.png").default;
@@ -20,7 +28,6 @@ export default function GetMusic({ tempo, timeSig, difficulty, bar, setBar, blan
   let timeInterval = (60 / tempo) * 1000;
   let start;
   var click = new Audio(metronome);
-  
 
   const noteChoicesEasy = [
     <img
@@ -76,31 +83,35 @@ export default function GetMusic({ tempo, timeSig, difficulty, bar, setBar, blan
       style={{ background: "transparent" }}
     />,
   ];
-  const noteChoicesHard = noteChoicesMedium.filter(note => note.props.alt !== "dotted-minim").concat([<img
-    className="note"
-    src={strawBerry}
-    alt="quaver,semi-quaver combo"
-    id="1"
-    style={{ background: "transparent" }}
-  />,
-    <img
-      className="note"
-      src={lemonade}
-      alt="semi-quaver,quaver combo"
-      id="1"
-      style={{ background: "transparent" }}
-    />,
-    <img
-      className="note"
-      src={triplet}
-      alt="triplet"
-      id="1"
-      style={{ background: "transparent" }}
-    />,
-  ])
+  const noteChoicesHard = noteChoicesMedium
+    .filter((note) => note.props.alt !== "dotted-minim")
+    .concat([
+      <img
+        className="note"
+        src={strawBerry}
+        alt="quaver,semi-quaver combo"
+        id="1"
+        style={{ background: "transparent" }}
+      />,
+      <img
+        className="note"
+        src={lemonade}
+        alt="semi-quaver,quaver combo"
+        id="1"
+        style={{ background: "transparent" }}
+      />,
+      <img
+        className="note"
+        src={triplet}
+        alt="triplet"
+        id="1"
+        style={{ background: "transparent" }}
+      />,
+    ]);
 
-
-  const allNotes = noteChoicesEasy.concat(noteChoicesMedium).concat(noteChoicesHard);
+  const allNotes = noteChoicesEasy
+    .concat(noteChoicesMedium)
+    .concat(noteChoicesHard);
   const [noteChoices, setNoteChoices] = useState(noteChoicesEasy);
 
   useEffect(() => {
@@ -111,13 +122,13 @@ export default function GetMusic({ tempo, timeSig, difficulty, bar, setBar, blan
     } else if (difficulty === "Hard") {
       setNoteChoices(noteChoicesHard);
     }
-    if((difficulty === "Medium" && timeSig === "3/4") || (difficulty === "Medium" && timeSig === "5/4"))
-       { 
-         setNoteChoices(
-          noteChoicesMedium.filter((note) => note.props.id !== "3")
-          )
-        }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (
+      (difficulty === "Medium" && timeSig === "3/4") ||
+      (difficulty === "Medium" && timeSig === "5/4")
+    ) {
+      setNoteChoices(noteChoicesMedium.filter((note) => note.props.id !== "3"));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [difficulty, timeSig]);
 
   const getRandBar = () => {
@@ -155,7 +166,6 @@ export default function GetMusic({ tempo, timeSig, difficulty, bar, setBar, blan
         }
       }
     } else if (timeSig === "5/4") {
-    
       while (totalNoteValue < 5) {
         getNote();
       }
@@ -180,7 +190,6 @@ export default function GetMusic({ tempo, timeSig, difficulty, bar, setBar, blan
         }
       }
     } else {
-    
       while (totalNoteValue < 4) {
         getNote();
       }
@@ -206,18 +215,13 @@ export default function GetMusic({ tempo, timeSig, difficulty, bar, setBar, blan
       }
     }
 
-
-    const cleanUpBar = newBar.map(note => {
-      if(note.props.alt === "minim") {
-        return [note, blankSquare]
-      }
-      else if(note.props.alt === "dotted-minim") {
-        return [note, blankSquare, blankSquare]
-      }
-      else return note;
-    })
-
-
+    const cleanUpBar = newBar.map((note) => {
+      if (note.props.alt === "minim") {
+        return [note, blankSquare];
+      } else if (note.props.alt === "dotted-minim") {
+        return [note, blankSquare, blankSquare];
+      } else return note;
+    });
 
     setBar(cleanUpBar.flat());
   };
@@ -230,22 +234,24 @@ export default function GetMusic({ tempo, timeSig, difficulty, bar, setBar, blan
     const noteArray = Array.from(
       document.getElementById("bar").getElementsByClassName("note")
     );
+    const buttons = Array.from(document.getElementsByClassName("input"));
+
     if (!start) {
+      buttons.forEach((button) => button.setAttribute("disabled", " "));
       document.getElementById(
         "metroIcon"
       ).style.animation = `tickTock ${timeInterval}ms infinite`;
       click.play();
       document.getElementById("countIn").style.visibility = "visible";
       start = setInterval(() => {
-        if (countIn < bar.length){
+        if (countIn < bar.length) {
           countIn++;
-        }
-        else {
+        } else {
           document.getElementById("countIn").style.visibility = "hidden";
         }
         click = new Audio(metronome);
         click.play();
-        document.getElementById("countIn").innerHTML =`${countIn}`
+        document.getElementById("countIn").innerHTML = `${countIn}`;
       }, timeInterval);
 
       setTimeout(() => {
@@ -258,14 +264,12 @@ export default function GetMusic({ tempo, timeSig, difficulty, bar, setBar, blan
             i++;
           }
         }, timeInterval);
-      }, timeInterval * (noteArray.length - 1)); 
+      }, timeInterval * (noteArray.length - 1));
 
-      
       if (document.getElementById("repeatBar").checked) {
         setTimeout(() => {
-          let x=0;
+          let x = 0;
           lightUp = setInterval(() => {
-            
             if (x > 0) {
               noteArray[x - 1].style.background = "transparent";
             }
@@ -276,24 +280,21 @@ export default function GetMusic({ tempo, timeSig, difficulty, bar, setBar, blan
           }, timeInterval);
         }, timeInterval * (noteArray.length * 2 - 1));
       }
-
+    } else {
+      clearTimeout();
+      clearInterval(start);
+      clearInterval(lightUp);
+      countIn = 1;
+      document.getElementById("countIn").innerHTML = `${countIn}`;
+      document.getElementById("countIn").style.visibility = "hidden";
+      lightUp = noteArray.forEach(
+        (note) => (note.style.background = "transparent")
+      );
+      start = null;
+      document.getElementById("metroIcon").style.animation = "none";
+      buttons.forEach((button) => button.removeAttribute("disabled"));
     }
-    
-    
-      else {
-        clearInterval(start);
-        clearInterval(lightUp);
-        countIn = 1;
-        document.getElementById("countIn").innerHTML =`${countIn}`
-        document.getElementById("countIn").style.visibility = "hidden";
-
-        lightUp = noteArray.forEach(
-          (note) => (note.style.background = "transparent")
-        );
-        start = null;
-        document.getElementById("metroIcon").style.animation = "none";
-      }
-    }
+  }
 
   function changeBarLines() {
     if (document.getElementById("repeatBar").checked) {
@@ -310,23 +311,32 @@ export default function GetMusic({ tempo, timeSig, difficulty, bar, setBar, blan
       <HelpInfo allNotes={allNotes} closeHelp={closeHelp} />
       <span id="metronomeContainer">
         <button id="metronome" onClick={toggleMetro}>
-          <img id="metroIcon" src={metroIcon} alt="ticker"></img>
+          <img
+            id="metroIcon"
+            src={metroIcon}
+            alt="ticker"
+            style={{ animation: "none" }}
+          ></img>
         </button>
         <input id="repeatBar" type="checkbox" onChange={changeBarLines}></input>
         Repeat
       </span>
       <div id="countIn">{countIn}</div>
       <div id="barContainer">
-        <div id="barlineLeft" className="barLine"><img src={barLine} alt="barline"></img></div>
+        <div id="barlineLeft" className="barLine">
+          <img src={barLine} alt="barline"></img>
+        </div>
         <div className="timeSigContainer">
           <div>{timeSig[0]}</div>
           <div>{timeSig[2]}</div>
         </div>
         <div id="bar">{bar}</div>
-        <div id="barlineRight" className="barLine"><img src={barLine} alt="barline"></img></div>
+        <div id="barlineRight" className="barLine">
+          <img src={barLine} alt="barline"></img>
+        </div>
       </div>
       <span id="buttonContainer">
-        <button id="getBar" onClick={getRandBar}>
+        <button className="input" id="getBar" onClick={getRandBar}>
           Get new rhythm!
         </button>
       </span>
