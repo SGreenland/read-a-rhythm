@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import HelpInfo from "./HelpInfo";
+import Tooltip from "./Tooltip";
 
 export default function GetMusic({
   tempo,
@@ -28,6 +29,7 @@ export default function GetMusic({
   let timeInterval = (60 / tempo) * 1000;
   let start;
   var click = new Audio(metronome);
+  const [width, setWidth] = useState("100%");
 
   const noteChoicesEasy = [
     <img
@@ -35,21 +37,21 @@ export default function GetMusic({
       src={crotchet}
       alt="crotchet"
       id="1"
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", width: width }}
     />,
     <img
       className="note"
       src={minim}
       alt="minim"
       id="2"
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", width: width }}
     />,
     <img
       className="note"
       src={crotchetRest}
       alt="crotchet-rest"
       id="1"
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", width: width }}
     />,
   ];
   const noteChoicesMedium = [
@@ -59,28 +61,28 @@ export default function GetMusic({
       alt="quavers"
       id="1"
       width="270px"
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", width: width }}
     />,
     <img
       className="note"
       src={semiQuavers}
       alt="semi-quavers"
       id="1"
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", width: width }}
     />,
     <img
       className="note"
       src={dottedMinim}
       alt="dotted-minim"
       id="3"
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", width: width }}
     />,
     <img
       className="note"
       src={restAnd}
       alt="quaver-rest/quaver"
       id="1"
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", width: width }}
     />,
   ];
   const noteChoicesHard = noteChoicesMedium
@@ -91,21 +93,21 @@ export default function GetMusic({
         src={strawBerry}
         alt="quaver,semi-quaver combo"
         id="1"
-        style={{ background: "transparent" }}
+        style={{ background: "transparent", width: width }}
       />,
       <img
         className="note"
         src={lemonade}
         alt="semi-quaver,quaver combo"
         id="1"
-        style={{ background: "transparent" }}
+        style={{ background: "transparent", width: width }}
       />,
       <img
         className="note"
         src={triplet}
         alt="triplet"
         id="1"
-        style={{ background: "transparent" }}
+        style={{ background: "transparent", width: width }}
       />,
     ]);
 
@@ -128,8 +130,14 @@ export default function GetMusic({
     ) {
       setNoteChoices(noteChoicesMedium.filter((note) => note.props.id !== "3"));
     }
+    if (timeSig === "5/4" && window.outerWidth < 500) {
+      setWidth("120%");
+    } else {
+      setWidth("100%");
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [difficulty, timeSig]);
+  }, [difficulty, timeSig, width]);
 
   const getRandBar = () => {
     let newBar = [];
@@ -159,7 +167,7 @@ export default function GetMusic({
                 src={crotchet}
                 alt="crotchet"
                 id="1"
-                style={{ background: "transparent" }}
+                style={{ background: "transparent", width: width }}
               />
             );
           }
@@ -169,6 +177,7 @@ export default function GetMusic({
       while (totalNoteValue < 5) {
         getNote();
       }
+
       if (totalNoteValue === 6) {
         for (let i = 0; i < newBar.length; i++) {
           if (newBar[i].props.id === "1") {
@@ -183,7 +192,7 @@ export default function GetMusic({
                 src={crotchet}
                 alt="crotchet"
                 id="1"
-                style={{ background: "transparent" }}
+                style={{ background: "transparent", width: width }}
               />
             );
           }
@@ -209,7 +218,7 @@ export default function GetMusic({
             src={crotchet}
             alt="crotchet"
             id="1"
-            style={{ background: "transparent" }}
+            style={{ background: "transparent", width: width }}
           />
         );
       }
@@ -227,7 +236,8 @@ export default function GetMusic({
   };
 
   let lightUp;
-  let countIn = 1;
+  let countIn = 0;
+  let countDown;
 
   function toggleMetro(e) {
     let i = 0;
@@ -235,62 +245,67 @@ export default function GetMusic({
       document.getElementById("bar").getElementsByClassName("note")
     );
     const buttons = Array.from(document.getElementsByClassName("input"));
+    console.log(noteArray.length);
 
-    if (!start) {
+    if (!start && click.readyState === 4) {
       buttons.forEach((button) => button.setAttribute("disabled", " "));
       document.getElementById(
         "metroIcon"
-      ).style.animation = `tickTock ${timeInterval}ms infinite`;
-      click.play();
-      document.getElementById("countIn").style.visibility = "visible";
+      ).style.animation = `tickTock ${timeInterval}ms linear ${timeInterval}ms infinite`;
+      // click.play();
       start = setInterval(() => {
+        document.getElementById("countIn").style.visibility = "visible";
         if (countIn < bar.length) {
           countIn++;
         } else {
           document.getElementById("countIn").style.visibility = "hidden";
         }
-        click = new Audio(metronome);
         click.play();
+        click.currentTime = 0;
         document.getElementById("countIn").innerHTML = `${countIn}`;
       }, timeInterval);
 
-      setTimeout(() => {
+      countDown = setTimeout(() => {
+        if (!start) {
+          return;
+        }
         lightUp = setInterval(() => {
           if (i > 0) {
             noteArray[i - 1].style.background = "transparent";
           }
-          if (i < bar.length) {
+          if (i < noteArray.length) {
             noteArray[i].style.background = "rgb(132 195 255 / 40%)";
             i++;
           }
         }, timeInterval);
-      }, timeInterval * (noteArray.length - 1));
+      }, timeInterval * noteArray.length);
 
       if (document.getElementById("repeatBar").checked) {
-        setTimeout(() => {
+        countDown = setTimeout(() => {
           let x = 0;
+
           lightUp = setInterval(() => {
             if (x > 0) {
               noteArray[x - 1].style.background = "transparent";
             }
-            if (x < bar.length) {
+            if (x < noteArray.length) {
               noteArray[x].style.background = "rgb(132 195 255 / 40%)";
               x++;
             }
           }, timeInterval);
-        }, timeInterval * (noteArray.length * 2 - 1));
+        }, timeInterval * (noteArray.length * 2 - 1) + timeInterval);
       }
     } else {
-      clearTimeout();
+      clearTimeout(countDown);
       clearInterval(start);
       clearInterval(lightUp);
-      countIn = 1;
+      countIn = 0;
+      countDown = null;
+      start = null;
+      lightUp = null;
       document.getElementById("countIn").innerHTML = `${countIn}`;
       document.getElementById("countIn").style.visibility = "hidden";
-      lightUp = noteArray.forEach(
-        (note) => (note.style.background = "transparent")
-      );
-      start = null;
+      noteArray.forEach((note) => (note.style.background = "transparent"));
       document.getElementById("metroIcon").style.animation = "none";
       buttons.forEach((button) => button.removeAttribute("disabled"));
     }
@@ -309,6 +324,7 @@ export default function GetMusic({
   return (
     <div id="mainSection">
       <HelpInfo allNotes={allNotes} closeHelp={closeHelp} />
+      <Tooltip />
       <span id="metronomeContainer">
         <button id="metronome" onClick={toggleMetro}>
           <img

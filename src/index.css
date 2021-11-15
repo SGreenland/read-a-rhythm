@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -23,10 +23,11 @@ h1 {
 img {
   width: 100%;
   /* height: 80%; */
+  max-height: 200px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -57,7 +58,7 @@ code {
   padding: 4px;
 }
 
- .option button {
+.option button {
   width: 90%;
 }
 
@@ -69,18 +70,11 @@ code {
   align-items: center;
 }
 
-
-
- button {
-  border-radius: 4px;
-}
-
-
- .hideOptions {
+.hideOptions {
   display: none;
 }
 
- .showOptions {
+.showOptions {
   display: flex;
   flex-direction: column;
   border: 1px inset lightgray;
@@ -91,8 +85,6 @@ li:hover {
   cursor: pointer;
 }
 
-
-
 li {
   list-style: none;
   width: 100%;
@@ -101,18 +93,20 @@ li {
 
 button {
   border: 2px solid rgb(5, 98, 190);
-  color: rgb(5, 98, 190)
+  border-radius: 6px;
+  color: rgb(5, 98, 190);
+  padding: 10px;
 }
 
 div.option:focus-within > button {
   background-color: rgb(52, 135, 218);
-  color: whitesmoke 
+  color: whitesmoke;
 }
 
-button:hover  {
+button:hover {
   cursor: pointer;
   background-color: rgb(52, 135, 218);
-  color: whitesmoke 
+  color: whitesmoke;
 }
 
 #tempo {
@@ -123,34 +117,27 @@ button:hover  {
   padding-top: 5px;
 }
 
-
 #barContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-inline: 20px;
+  padding: 40px;
   font-size: 3.5vw;
-  height: 20vmax;
+  height: 150px;
 }
 
 #bar {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: center;
-  
 }
 .barLine {
   display: flex;
 }
 
-
 #buttonContainer {
   display: flex;
   justify-content: center;
-}
-
-button {
-  padding: 10px;
 }
 
 #metronome {
@@ -160,7 +147,6 @@ button {
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
 }
-
 
 #metronomeContainer {
   display: flex;
@@ -180,10 +166,10 @@ button {
 
 @keyframes tickTock {
   from {
-    transform: rotate(-15deg)
+    transform: rotate(-15deg);
   }
   to {
-    transform: rotate(15deg)
+    transform: rotate(15deg);
   }
 }
 
@@ -203,13 +189,12 @@ button {
   font-size: 2.1vw;
   text-align: center;
   line-height: 1.5;
-}  
+}
 
 #helpNote {
   width: 75%;
   margin: 0 auto;
 }
-
 
 #helpBtn {
   all: unset;
@@ -244,23 +229,56 @@ button {
   flex-direction: column;
   padding-inline: 2px;
   font-weight: bold;
-  font-family: 'Yeseva One', cursive;
+  font-family: "Yeseva One", cursive;
   line-height: 0.8;
 }
 
-@media only screen and (max-width: 360px) {
+#toolTip {
+  position: relative;
+  left: 50px;
+  width: 25%;
+  padding: 10px;
+  text-align: center;
+  background-color: rgb(52, 135, 218);
+  color: whitesmoke;
+  margin: auto;
+  left: 0;
+  border-radius: 6px;
+}
+
+#toolTip::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  right: 50%;
+  border: 10px solid;
+  border-color: rgb(52, 135, 218) transparent transparent transparent;
+}
+
+#closeTooltip {
+  all: unset;
+  float: right;
+  background: rgb(5, 98, 190);
+  padding: 2px;
+  margin-top: -5px;
+  margin-right: -5px;
+  line-height: 0.8;
+}
+
+#closeTooltip:hover {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 450px) {
   #heading {
     font-size: smaller;
   }
 
   #barContainer {
+    font-size: large;
     padding: 0;
   }
-
-} 
-
-
-
-
-
-
+  #toolTip {
+    width: 70%;
+  }
+}
