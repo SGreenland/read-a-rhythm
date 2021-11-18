@@ -6,11 +6,13 @@ export default function ToolTip() {
   }
   return (
     <div id="toolTip">
+      <div>
+        Click the metronome to practice with strict time! ...You also get a
+        count-in!
+      </div>
       <button id="closeTooltip" onClick={closeTip}>
-        <span style={{ position: "relative", bottom: "1px" }}>X</span>
+        X
       </button>
-      Click the metronome to practice with strict time! ...You also get a
-      count-in!
     </div>
   );
 }

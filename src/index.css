@@ -235,9 +235,10 @@ button:hover {
 
 #toolTip {
   position: relative;
+  display: flex;
   left: 50px;
   width: 25%;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   background-color: rgb(52, 135, 218);
   color: whitesmoke;
@@ -246,10 +247,14 @@ button:hover {
   border-radius: 6px;
 }
 
+#toolTip div {
+  padding: 5px;
+}
+
 #toolTip::after {
   content: " ";
   position: absolute;
-  top: 100%;
+  top: 99%;
   right: 50%;
   border: 10px solid;
   border-color: rgb(52, 135, 218) transparent transparent transparent;
@@ -257,12 +262,9 @@ button:hover {
 
 #closeTooltip {
   all: unset;
-  float: right;
-  background: rgb(5, 98, 190);
-  padding: 2px;
-  margin-top: -5px;
-  margin-right: -5px;
-  line-height: 0.8;
+  position: relative;
+  bottom: 4px;
+  align-self: flex-start;
 }
 
 #closeTooltip:hover {
@@ -272,6 +274,10 @@ button:hover {
 @media only screen and (max-width: 450px) {
   #heading {
     font-size: smaller;
+  }
+
+  h1 {
+    font-size: 1.5em;
   }
 
   #barContainer {
