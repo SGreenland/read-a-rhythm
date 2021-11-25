@@ -175,7 +175,7 @@ button:hover {
 
 #help {
   grid-template-columns: repeat(3, 1fr);
-  width: 75%;
+  width: 65%;
   justify-content: center;
   margin: 0 auto;
   background: gainsboro;
@@ -186,13 +186,13 @@ button:hover {
 }
 
 .helpNotes {
-  font-size: 2.1vw;
+  font-size: 2.1vh;
   text-align: center;
   line-height: 1.5;
 }
 
 #helpNote {
-  width: 75%;
+  width: 70%;
   margin: 0 auto;
 }
 
@@ -216,6 +216,7 @@ button:hover {
   width: 100%;
   text-align: right;
   text-decoration: none;
+  right: 5px;
   color: black;
 }
 
@@ -286,5 +287,8 @@ button:hover {
   }
   #toolTip {
     width: 70%;
+  }
+  #help {
+    width: 80%;
   }
 }

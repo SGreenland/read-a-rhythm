@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import HelpInfo from "./HelpInfo";
 import Tooltip from "./Tooltip";
+import { nanoid } from "nanoid";
 
 export default function GetMusic({
   tempo,
@@ -8,9 +9,9 @@ export default function GetMusic({
   difficulty,
   bar,
   setBar,
-  blankSquare,
   closeHelp,
 }) {
+  const blank = require("./images/blankspace.png").default;
   const crotchet = require("./images/1.png").default;
   const minim = require("./images/2.png").default;
   const crotchetRest = require("./images/3.png").default;
@@ -21,7 +22,7 @@ export default function GetMusic({
   const strawBerry = require("./images/10.png").default;
   const lemonade = require("./images/12.png").default;
   const triplet = require("./images/triplet.png").default;
-  const metronome = require("./metronome/cowbell.mp3").default;
+  const metronome = require("./metronome/woodblock.mp3").default;
   const metroIcon = require("./images/metroIcon.png").default;
   const barLine = require("./images/barLine.png").default;
   const repeatBarLeft = require("./images/repeatBarLeft.png").default;
@@ -136,10 +137,13 @@ export default function GetMusic({
       setWidth("100%");
     }
 
+    getRandBar();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [difficulty, timeSig, width]);
 
   const getRandBar = () => {
+    // const current = JSON.stringify(bar);
     let newBar = [];
     let totalNoteValue = 0;
 
@@ -226,13 +230,66 @@ export default function GetMusic({
 
     const cleanUpBar = newBar.map((note) => {
       if (note.props.alt === "minim") {
-        return [note, blankSquare];
+        return [
+          <img
+            alt={note.props.alt}
+            className={note.props.className}
+            src={note.props.src}
+            key={nanoid()}
+          ></img>,
+          <img
+            className="note"
+            src={blank}
+            key={nanoid()}
+            alt="blank"
+            style={{ background: "transparent" }}
+          />,
+        ];
       } else if (note.props.alt === "dotted-minim") {
-        return [note, blankSquare, blankSquare];
-      } else return note;
+        return [
+          <img
+            alt={note.props.alt}
+            className={note.props.className}
+            src={note.props.src}
+            key={nanoid()}
+          ></img>,
+          <img
+            className="note"
+            src={blank}
+            key={nanoid()}
+            alt="blank"
+            style={{ background: "transparent" }}
+          />,
+          <img
+            className="note"
+            src={blank}
+            key={nanoid()}
+            alt="blank"
+            style={{ background: "transparent" }}
+          />,
+        ];
+      } else
+        return (
+          <img
+            alt={note.props.alt}
+            className={note.props.className}
+            src={note.props.src}
+            key={nanoid()}
+          ></img>
+        );
     });
 
-    setBar(cleanUpBar.flat());
+    const newNotes = cleanUpBar.flat();
+
+    const prevNotesString = bar.map((note) => note.props.alt).toString();
+    const newNotesString = newNotes.map((note) => note.props.alt).toString();
+
+    //compare to avoid repeats
+    if (prevNotesString === newNotesString) {
+      getRandBar();
+    } else {
+      setBar(newNotes);
+    }
   };
 
   let lightUp;
@@ -260,8 +317,9 @@ export default function GetMusic({
         } else {
           document.getElementById("countIn").style.visibility = "hidden";
         }
-        click.play();
+
         click.currentTime = 0;
+        click.play();
         document.getElementById("countIn").innerHTML = `${countIn}`;
       }, timeInterval);
 

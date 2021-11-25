@@ -6,21 +6,8 @@ function App() {
   const [tempoValue, setTempoValue] = useState(60);
   const [timeSig, setTimeSig] = useState("4/4");
   const [difficulty, setDifficulty] = useState("Easy");
-  const blank = require("./images/blankspace.png").default;
-  const blankSquare = (
-    <img
-      className="note"
-      src={blank}
-      alt="blank"
-      style={{ background: "transparent" }}
-    />
-  );
-  const [bar, setBar] = useState([
-    blankSquare,
-    blankSquare,
-    blankSquare,
-    blankSquare,
-  ]);
+
+  const [bar, setBar] = useState([]);
 
   function toggleOptions(e) {
     if (
@@ -54,8 +41,8 @@ function App() {
 
   const getTimeOption = (e) => {
     setTimeSig(e.target.innerHTML);
-    const emptyBar = new Array(e.target.value).fill(blankSquare);
-    setBar(emptyBar);
+    // const emptyBar = new Array(e.target.value).fill(blankSquare);
+    // setBar(emptyBar);
     document.getElementById(
       "bar"
     ).style.gridTemplateColumns = `repeat(${e.target.value}, 1fr)`;
@@ -189,7 +176,6 @@ function App() {
         difficulty={difficulty}
         bar={bar}
         setBar={setBar}
-        blankSquare={blankSquare}
         closeHelp={displayHelp}
       />
     </div>
