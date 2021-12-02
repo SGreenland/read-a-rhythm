@@ -235,11 +235,13 @@ export default function GetMusic({
             alt={note.props.alt}
             className={note.props.className}
             src={note.props.src}
+            width={width}
             key={nanoid()}
           ></img>,
           <img
             className="note"
             src={blank}
+            width={width}
             key={nanoid()}
             alt="blank"
             style={{ background: "transparent" }}
@@ -251,11 +253,13 @@ export default function GetMusic({
             alt={note.props.alt}
             className={note.props.className}
             src={note.props.src}
+            width={width}
             key={nanoid()}
           ></img>,
           <img
             className="note"
             src={blank}
+            width={width}
             key={nanoid()}
             alt="blank"
             style={{ background: "transparent" }}
@@ -263,6 +267,7 @@ export default function GetMusic({
           <img
             className="note"
             src={blank}
+            width={width}
             key={nanoid()}
             alt="blank"
             style={{ background: "transparent" }}
@@ -274,6 +279,7 @@ export default function GetMusic({
             alt={note.props.alt}
             className={note.props.className}
             src={note.props.src}
+            width={width}
             key={nanoid()}
           ></img>
         );

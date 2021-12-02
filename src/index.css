@@ -60,6 +60,7 @@ code {
 
 .option button {
   width: 90%;
+  min-width: 90px;
 }
 
 .option {
@@ -70,6 +71,10 @@ code {
   align-items: center;
 }
 
+i {
+  float: right;
+}
+
 .hideOptions {
   display: none;
 }
@@ -77,7 +82,10 @@ code {
 .showOptions {
   display: flex;
   flex-direction: column;
-  border: 1px inset lightgray;
+  background-color: whitesmoke;
+  border: 2px outset lightgray;
+  border-top: none;
+  border-radius: 6px;
   width: 90%;
 }
 li:hover {
@@ -180,7 +188,7 @@ button:hover {
   margin: 0 auto;
   background: gainsboro;
   position: relative;
-  bottom: 20vh;
+  bottom: 200px;
   padding: 20px;
   grid-column-gap: 5px;
 }

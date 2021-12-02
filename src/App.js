@@ -81,7 +81,8 @@ function App() {
         <div className="option">
           <div className="optionHeader">Time-sig:</div>
           <button className="input" onClick={toggleOptions} id="selectTime">
-            {timeSig}{" "}
+            {timeSig}
+            <i className="fas fa-chevron-down"></i>
           </button>
           <div
             id="timeSigOptions"
@@ -121,7 +122,8 @@ function App() {
             onClick={toggleOptions}
             id="selectDifficulty"
           >
-            {difficulty}{" "}
+            {difficulty}
+            <i className="fas fa-chevron-down"></i>
           </button>
           <div
             id="difficultyOptions"
