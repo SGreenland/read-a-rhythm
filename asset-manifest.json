@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/read-a-rhythm/static/css/main.648a5619.chunk.css",
-    "main.js": "/read-a-rhythm/static/js/main.8a58f639.chunk.js",
-    "main.js.map": "/read-a-rhythm/static/js/main.8a58f639.chunk.js.map",
+    "main.css": "/read-a-rhythm/static/css/main.3e14d00b.chunk.css",
+    "main.js": "/read-a-rhythm/static/js/main.dceadfda.chunk.js",
+    "main.js.map": "/read-a-rhythm/static/js/main.dceadfda.chunk.js.map",
     "runtime-main.js": "/read-a-rhythm/static/js/runtime-main.be8cdb21.js",
     "runtime-main.js.map": "/read-a-rhythm/static/js/runtime-main.be8cdb21.js.map",
     "static/js/2.70e7b4d5.chunk.js": "/read-a-rhythm/static/js/2.70e7b4d5.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.6177907a.chunk.js": "/read-a-rhythm/static/js/3.6177907a.chunk.js",
     "static/js/3.6177907a.chunk.js.map": "/read-a-rhythm/static/js/3.6177907a.chunk.js.map",
     "index.html": "/read-a-rhythm/index.html",
-    "static/css/main.648a5619.chunk.css.map": "/read-a-rhythm/static/css/main.648a5619.chunk.css.map",
+    "static/css/main.3e14d00b.chunk.css.map": "/read-a-rhythm/static/css/main.3e14d00b.chunk.css.map",
     "static/js/2.70e7b4d5.chunk.js.LICENSE.txt": "/read-a-rhythm/static/js/2.70e7b4d5.chunk.js.LICENSE.txt",
     "static/media/woodblock.mp3": "/read-a-rhythm/static/media/woodblock.77bd9026.mp3"
   },
   "entrypoints": [
     "static/js/runtime-main.be8cdb21.js",
     "static/js/2.70e7b4d5.chunk.js",
-    "static/css/main.648a5619.chunk.css",
-    "static/js/main.8a58f639.chunk.js"
+    "static/css/main.3e14d00b.chunk.css",
+    "static/js/main.dceadfda.chunk.js"
   ]
 }
