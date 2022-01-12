@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/read-a-rhythm/static/css/main.3e14d00b.chunk.css",
-    "main.js": "/read-a-rhythm/static/js/main.dceadfda.chunk.js",
-    "main.js.map": "/read-a-rhythm/static/js/main.dceadfda.chunk.js.map",
+    "main.js": "/read-a-rhythm/static/js/main.5a62e070.chunk.js",
+    "main.js.map": "/read-a-rhythm/static/js/main.5a62e070.chunk.js.map",
     "runtime-main.js": "/read-a-rhythm/static/js/runtime-main.be8cdb21.js",
     "runtime-main.js.map": "/read-a-rhythm/static/js/runtime-main.be8cdb21.js.map",
     "static/js/2.70e7b4d5.chunk.js": "/read-a-rhythm/static/js/2.70e7b4d5.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.be8cdb21.js",
     "static/js/2.70e7b4d5.chunk.js",
     "static/css/main.3e14d00b.chunk.css",
-    "static/js/main.dceadfda.chunk.js"
+    "static/js/main.5a62e070.chunk.js"
   ]
 }
