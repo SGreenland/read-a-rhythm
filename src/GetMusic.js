@@ -118,6 +118,7 @@ export default function GetMusic({
   const [noteChoices, setNoteChoices] = useState(noteChoicesEasy);
 
   useEffect(() => {
+    //change note choices when difficulty is changed.
     if (difficulty === "Easy") {
       setNoteChoices(noteChoicesEasy);
     } else if (difficulty === "Medium") {
@@ -129,7 +130,9 @@ export default function GetMusic({
       (difficulty === "Medium" && timeSig === "3/4") ||
       (difficulty === "Medium" && timeSig === "5/4")
     ) {
-      setNoteChoices(noteChoicesMedium.filter((note) => note.props.id !== "3"));
+      setNoteChoices(() =>
+        noteChoicesMedium.filter((note) => note.props.id !== "3")
+      );
     }
     if (timeSig === "5/4" && window.outerWidth < 500) {
       setWidth("120%");
@@ -137,13 +140,15 @@ export default function GetMusic({
       setWidth("100%");
     }
 
-    getRandBar();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [difficulty, timeSig, width]);
 
+  useEffect(() => {
+    //make sure notechoices are set before generating new random bar.
+    getRandBar();
+  }, [noteChoices]);
+
   const getRandBar = () => {
-    // const current = JSON.stringify(bar);
     let newBar = [];
     let totalNoteValue = 0;
 
